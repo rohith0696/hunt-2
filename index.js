@@ -1,8 +1,10 @@
+const http = require("http")
 const express = require('express')
 const app = express();
 const engines = require('consolidate')
 const path = require('path')
-const port = 3000;
+const port = process.env.PORT || 3000;
+// process.title = myApp;
 
 //set the root view folder
 app.set('views', path.join(__dirname, './views'))
@@ -16,7 +18,12 @@ app.use('/', router)
 
 app.listen(port,()=>
   {
-    console.log(`\nApp running at localhost:${port}!`)
+    try{
+    console.log(`\nApp running at localhost 3000`)
+  }catch(err)
+  {
+    console.error(err.message);
+  }
   }
 );
 
