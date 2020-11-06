@@ -4,7 +4,9 @@
   "description": "- GitHub Repo : https://github.com/rohith0696/hunt-2\r - Hosted App deployed on Heroku:",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,8 @@
   },
   "homepage": "https://github.com/rohith0696/hunt-2#readme",
   "dependencies": {
+    "consolidate": "^0.16.0",
+    "ejs": "^3.1.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
