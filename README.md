@@ -2,16 +2,16 @@
 
 ## Links
 - GitHub Repo : https://github.com/rohith0696/hunt-2
-- Hosted App deployed on Heroku: 
+- Hosted App deployed on Heroku: https://hunt-2.herokuapp.com/
 
 ## Mean Stack
 - Platform : Node(15.1.0),
 - Web Framework : Express,
 - View Engine : EJS,
-- DB : NoSQL
-- ORM : Mongoose
-- Web App Host : Heroku
-- Data Host : Atlas
+- DB : NoSQL,
+- ORM : Mongoose,
+- Web App Host : Heroku,
+- Data Host : Atlas,
 - Coding Standards : ESlint
 
 ## References

@@ -19,7 +19,7 @@ app.use('/', router)
 app.listen(port,()=>
   {
     try{
-    console.log(`\nApp running at localhost 3000`)
+    console.log(`\nApp running at http://localhost:3000/`)
   }catch(err)
   {
     console.error(err.message);
