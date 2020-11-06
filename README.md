@@ -4,7 +4,7 @@
 - GitHub Repo : https://github.com/rohith0696/hunt-2
 - Hosted App deployed on Heroku: https://hunt-2.herokuapp.com/
 
-## Mean Stack
+## Stack
 - Platform : Node(15.1.0),
 - Web Framework : Express,
 - View Engine : EJS,
