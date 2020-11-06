@@ -2,7 +2,7 @@ const express = require('express')
 const app = express();
 const engines = require('consolidate')
 const path = require('path')
-const port = 8000;
+const port = 3000;
 
 //set the root view folder
 app.set('views', path.join(__dirname, './views'))
