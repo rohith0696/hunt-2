@@ -9,10 +9,20 @@
 - Web Framework : Express,
 - View Engine : EJS,
 - DB : NoSQL,
-- ORM : Mongoose,
+- ORD : Mongoose,
 - Web App Host : Heroku,
 - Data Host : Atlas,
-- Coding Standards : ESlint
+- Coding Standards : ESlint.
+
+## CI/CD
+- Auto deploy is used from main repo.
+
+## Instructions
+* Steps for starting the cloned repository using the Powershell.
+ * Open PS as admin using the Powershell in the-Hunt Folder.
+ * Use "npm install" to install modules.
+ * Use "npm run dev" to start a local version.
+ * Open a browser to the URL provided in the powershell.
 
 ## References
 - https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment
