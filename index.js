@@ -19,3 +19,5 @@ app.listen(port,()=>
     console.log(`\nApp running at localhost:${port}!`)
   }
 );
+
+module.exports = router;
