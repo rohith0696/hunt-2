@@ -1,0 +1,17 @@
+[
+    {
+        "userId" : 1,
+        "email" : "dcase@nwmissouri.edu",
+        "password" : "dcase"
+    },
+    {
+        "userId" : 2,
+        "email" : "S538308@nwmissouri.edu",
+        "password" : "rohith"
+    },
+    {
+        "userId" : 3,
+        "email" : "S538099@nwmissouri.edu",
+        "password" : "rajashekar"
+    }
+]

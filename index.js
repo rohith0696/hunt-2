@@ -45,13 +45,35 @@ const connectionOptions = {
 
 // use mongoose to connect & create a default connection
 mongoose.connect(dbURI, connectionOptions, (err, client) => {
-  if (err) { LOG.error('Error in MongoDB connection : ' + JSON.stringify(err, undefined, 2)) }
+  if (err) { console.log('Error in MongoDB connection : ' + JSON.stringify(err, undefined, 2)) }
   console.log('MongoDB connection succeeded.')
 })
 
 // Get the default connection
 const connection = mongoose.connection
 
+// Resusable function to seed a collection of documents
+function seed(collectionName) {
+  console.log(`Seeding collection = ${collectionName}`)
+  connection.db.collection(collectionName, (err, c) => {
+    if (err) { console.log('Error adding collection.') }
+    c.countDocuments((err, count) => {
+      if (err) { console.log('Error counting documents in collection.') }
+      if (count === 0) { c.insertMany(require('./data/' + collectionName + '.json')) }
+    })
+    c.find({}).toArray((err, data) => {
+      if (err) { console.log('Error adding data to collection.') }
+      console.log(data)
+    })
+  })
+}
+// Mongoose connections emit events
+connection.once('open', function () {
+  console.log('MongoDB event open')
+  console.log(`MongoDB connected ${dbURI}\n`)
+
+  seed('user')
+})
 
 app.listen(port,()=>
   {
