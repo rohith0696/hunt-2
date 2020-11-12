@@ -73,6 +73,7 @@ connection.once('open', function () {
   console.log(`MongoDB connected ${dbURI}\n`)
 
   seed('user')
+  seed('team')
 })
 
 app.listen(port,()=>
