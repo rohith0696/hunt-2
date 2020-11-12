@@ -67,4 +67,22 @@ router.get('/index', (req, res) => {
   router.get('/location/delete', (req, res, next) => {
     res.render('./location/delete', { title: "Locationdelete"})
   })
+
+  // Route requests that start with an expression to a controller
+  router.use('/team',require('../controllers/team/teamController'))
+
+  // catch 404 and forward to error handler
+router.use((req, res, next) => {
+  const error = new Error('Not Found')
+  error.status = 404
+  next(error)
+})
+
+// error handler
+router.use((err, req, res, next) => {
+  // render the error page
+  res.status(err.status || 500)
+  res.render('error', { status: err.status, message: err.message })
+})
+
 module.exports = router;
