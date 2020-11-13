@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/rohith0696/hunt-2#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "consolidate": "^0.16.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
