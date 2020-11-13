@@ -69,6 +69,7 @@ router.get('/index', (req, res) => {
   })
 
   // Route requests that start with an expression to a controller
+  router.use('/user',require('../controllers/user/userController'))
   router.use('/team',require('../controllers/team/teamController'))
 
   // catch 404 and forward to error handler
