@@ -52,7 +52,7 @@
   
     // const axios = require('axios')
     function goToDashboard(){
-        console.log("yo")
+        console.log("dashboard")
             var re = /\S+@\S+\.\S+/;
             var x = document.getElementById('email').value;
             var reg  = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -71,14 +71,17 @@
                      email: x,
                      password: y
                  }
-                 axios.post('/user/userSignupController/Regitser', body).then(res => {
+                 axios.post('/user/signup', body).then(res => {
                     console.log(res, 
                  " ------response is here")
                     alert("User Created successfully")
                     window.location = "/Home"
                  })
-                 .catch(e => 
+                 .catch(e => {
+                    console.log(e, "error is here")
                  alert("Invalid Email/Password")
+                 }
+                
              )
                    
                  }
@@ -90,4 +93,5 @@
  function   goToLogin(){
         window.location="/user/Login"
     }
+    
 </script>

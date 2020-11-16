@@ -55,11 +55,17 @@ router.get('/index', (req, res) => {
     res.render('./player/details', { title: "profile"})
   })
   
+  // router.get('/team/getTeam',(req,res, next) => {
+  //   res.render('./team/details', { title: "Teams", require: axios, teams: teams})
+  // })
   
   router.get('/team/createTeam', (req, res, next) => {
-    res.render('./team/create', { title: "Team"})
+    res.render('./team/create', { title: "Team", layout: true})
   })
   
+  router.get('/team/details', (req, res, next) => {
+    res.render('./team/details')
+  })
   
   router.get('/team/invitePlayers', (req, res, next) => {
     res.render('./team/invitePlayers', { title: "Invite Players"})
@@ -80,10 +86,10 @@ router.use((req, res, next) => {
 })
 
 // error handler
-router.use((err, req, res, next) => {
-  // render the error page
-  res.status(err.status || 500)
-  res.render('error', { status: err.status, message: err.message })
-})
+// router.use((err, req, res, next) => {
+//   // render the error page
+//   res.status(err.status || 500)
+//   res.render('error', { status: err.status, message: err.message })
+// })
 
 module.exports = router;

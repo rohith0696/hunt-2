@@ -3,6 +3,7 @@ const api = express.Router()
 const Model = require('../../models/team.js')
 const notfoundstring = 'team not found'
 const bodyParser = require('body-parser');
+const cons = require('consolidate');
 api.use(bodyParser.json())
 api.use(bodyParser.urlencoded({ extended: true }));
 
@@ -23,7 +24,7 @@ api.get('/findall', (req, res) => {
   api.get('/findone/:id', (req, res) => {
     console.log(`Handling /findone ${req}`)
     const id = parseInt(req.params.id)
-    Model.find({ _id: id }, (err, results) => {
+    Model.find({ teamid: id }, (err, results) => {
       if (err) { return res.end(notfoundstring) }
       res.json(results[0])
     })
@@ -32,16 +33,18 @@ api.get('/findall', (req, res) => {
   // RESPOND WITH VIEWS  --------------------------------------------
 
 // GET to this controller base URI (the default)
-api.get('/', (req, res) => {
-    console.log(`Handling GET / ${req}`)
-    Model.find({}, (err, data) => {
+api.get('/teams', async (req,res)=>{
+  console.log(`Handling GET / ${req}`)
+   await Model.find({},(err,data)=>{
         if (err) {
             return res.end('error on create')
         }
-      res.locals.team = data
-      res.render('user/index.ejs')
+        res.locals.teams = data
+        console.log(res.locals.teams, "teams are here")
+        res.render('team/details', {title: 'team', res})
     })
-  })
+})
+
   
 // GET create
 api.get('/create', (req, res) => {
@@ -49,21 +52,20 @@ api.get('/create', (req, res) => {
     Model.find({}, (err, data) => {
       res.locals.team = data
       res.locals.team = new Model()
-      res.render('team/create.ejs')
+      res.render('team/create')
     })
   })
 
   // GET /delete/:id
-  api.get('/delete/:id',(req, res)=>{
-    console.log(`Handling GET /delete/:id ${req}`)
+  api.post('/delete/:id',(req, res)=>{
+    console.log(`Handling delete/:id ${req}`)
     const id = parseInt(req.params.id)
-    Model.find({teamid:id},(err, results) =>{
+    Model.remove({teamid:id}).setOptions({single:true}),exec((err, deleted) =>{
         if(err) {
             return res.end(`Could not find the record to delete`)
         }
         console(`RETURNING VIEW FOR ${JSON.stringify(results)}`)
-        res.locals.team = results[0]
-        return res.render(`team/delete.ejs`)
+        return res.render(`team/get`)
     })
 })
 

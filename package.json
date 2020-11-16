@@ -19,12 +19,19 @@
   },
   "homepage": "https://github.com/rohith0696/hunt-2#readme",
   "dependencies": {
+    "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
     "consolidate": "^0.16.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
-    "mongoose": "^5.10.13"
+    "express-ejs-layouts": "^2.5.0",
+    "heroku": "^7.47.0",
+    "mongoose": "^5.10.12",
+    "mongoose-auto-increment": "^5.0.1",
+    "nodemon": "^2.0.6",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "eslint": "^7.12.1"
