@@ -3,11 +3,9 @@
  */
 
 const mongoose = require('mongoose'),
-autoInc = require('mongoose-auto-increment');
- var con = mongoose.createConnection("mongodb+srv://hunt-2:hunt@webcluster.65org.mongodb.net/hunt?retryWrites=true&w=majority");
-autoInc.initialize(con)
 
-const TeamSchema = new mongoose.Schema({
+
+const QuestSchema = new mongoose.Schema({
 
     questId:{
         type: Number,
@@ -21,7 +19,7 @@ const TeamSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 20
         
-    }
+    },
     
     questStartLocationLatitude: {
         type: INTEGER,
@@ -45,11 +43,6 @@ const TeamSchema = new mongoose.Schema({
       }
 
 });
-TeamSchema.plugin(autoInc.plugin,{
-    model: 'quest',
-    field: 'questId',
-    startAt: 1001,
-    incrementBy: 1
-});
+
 // Export model
-module.exports = mongoose.model('Quest', TeamSchema)
+module.exports = mongoose.model('Quest',QuestSchema)
