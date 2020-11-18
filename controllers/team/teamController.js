@@ -61,28 +61,30 @@ api.get('/create', (req, res) => {
 
   // GET /delete/:id
   api.post('/delete/:id',(req, res)=>{
-    console.log(`Handling delete/:id ${req}`)
+    console.log(req.params,'Handling delete')
     const id = parseInt(req.params.id)
-    teamModel.remove({teamid:id}).setOptions({single:true}),exec((err, deleted) =>{
+    console.log(id,'id')
+    teamModel.deleteOne({teamId:id}).setOptions({single:true}).exec((err, deleted) =>{
         if(err) {
-            return res.end(`Could not find the record to delete`)
+            return res.end("Could not find the record to delete")
         }
-        console(`RETURNING VIEW FOR ${JSON.stringify(results)}`)
-        return res.render(`team/get`)
+        console.log(`RETURNING VIEW FOR ${JSON.stringify(deleted)}`)
+        return res.redirect('/team/teams')
     })
 })
 
 
-api.get('/edit/:id', (req, res) => {
-  console.log(`Handling GET /edit/:id ${req}`)
+api.post('/edit/:id', (req, res) => {
+  console.log(`Handling EDIT`)
     const id = parseInt(req.params.id)
-    teamModel.find({ teamid: id }, (err, results) => {
+    teamModel.find({ teamId: id }, (err, results) => {
       if (err) { 
           return res.end(`Could not find the record`) 
         }
+        const tname = 
         console.log(`RETURNING VIEW FOR${JSON.stringify(results)}`)
       res.locals.student = results[0]
-      return res.render('team/edit.ejs')
+      return res.render('team/teams')
     })
   })
 
@@ -93,14 +95,13 @@ api.get('/edit/:id', (req, res) => {
   api.post('/save',(req,res)=>{
     console.log('into the save')
       const body = req.body
+      console.log(body)
       const team = new teamModel(body)
       console.log(team,"body is here")
       team.save((err) => {
           if(err){
               return res.status().json({"msg": err})
-            
           }else{
-            
             return res.json({
                 "error": false,
                 data: team
@@ -137,10 +138,10 @@ api.post('/delete/:id', (req, res) => {
   console.log(`Handling DELETE request ${req}`)
     const id = parseInt(req.params.id)
     console.log(`Handling REMOVING ID=${id}`)
-    Model.remove({ teamid: id }).setOptions({ single: true }).exec((err, deleted) => {
+    teamModel.remove({ teamid: id }).setOptions({ single: true }).exec((err, deleted) => {
       if (err) { return res.end(`Id not found`) }
       console.log(`Permanently deleted item ${JSON.stringify(deleted)}`)
-      return res.redirect('/teamController')
+      return res.redirect('/team/teams')
     })
   })
 

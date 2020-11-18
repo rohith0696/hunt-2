@@ -27,7 +27,7 @@ const TeamSchema = new mongoose.Schema({
 TeamSchema.plugin(autoInc.plugin,{
     model: 'team',
     field: 'teamId',
-    startAt: 1001,
+    startAt: 1002,
     incrementBy: 1
 });
 // Export model

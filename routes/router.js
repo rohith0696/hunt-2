@@ -62,13 +62,13 @@ router.get('/index', (req, res) => {
   //   res.render('./team/details', { title: "Teams", require: axios, teams: teams})
   // })
   
-  router.get('/team/createTeam', (req, res, next) => {
+  router.get('/team', (req, res, next) => {
     res.render('./team/create', { title: "Team", require: axios})
   })
   
-  router.get('/team/details', (req, res, next) => {
-    res.render('./team/details')
-  })
+  // router.get('/team/details', (req, res, next) => {
+  //   res.render('./team/details')
+  // })
   
   router.get('/team/invitePlayers', (req, res, next) => {
     res.render('./team/invitePlayers', { title: "Invite Players"})
