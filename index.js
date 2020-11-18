@@ -1,13 +1,17 @@
-const http = require("http")
+
 const express = require('express')
 const app = express();
 const engines = require('consolidate')
 const path = require('path')
+//const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
+const expressLayouts = require('express-ejs-layouts')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 // process.title = myApp;
 
+// app.use(bodyParser.json);
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 dotenv.config({ path: '.env' })
 console.log('Environment variables loaded into process.env.')
@@ -20,11 +24,13 @@ app.set('views', path.join(__dirname, './views'))
 
 // specify desired view engine (EJS)
 app.set('view engine', 'ejs')
-app.engine('ejs', engines.ejs)
+// app.engine('ejs', engines.ejs)
+
+app.use(expressLayouts);
+app.use(express.static("public"));
 
 const router = require('./routes/router')
 app.use('/', router)
-
 
 // Connect to NoSQL datastore........................
 

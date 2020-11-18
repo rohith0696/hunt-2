@@ -1,6 +1,9 @@
 const express = require('express')
 const path = require ('path')
 const router = express.Router()
+const axios = require('axios')
+
+
 
 router.get('/',(req,res)=>
 {
@@ -60,7 +63,7 @@ router.get('/index', (req, res) => {
   // })
   
   router.get('/team/createTeam', (req, res, next) => {
-    res.render('./team/create', { title: "Team", layout: true})
+    res.render('./team/create', { title: "Team", require: axios})
   })
   
   router.get('/team/details', (req, res, next) => {

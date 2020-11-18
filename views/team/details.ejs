@@ -5,11 +5,11 @@
         <div class="col col-md-12">
 <label>Teams</label>
             <% for(var i=0; i<teams.length; i++) { %>
-                <%= console.log(teams, "teams are here") %>
+                <!-- <%= console.log(teams, "teams are here") %> -->
                 <tr>
-                    <td><%= teams[i].teamname %></td>
+                    <td><%= teams[i].teamName %></td>
                     <label>Edit</label>
-                    <form method="post" action="/team/delete/<%=team[i].teamid%>">
+                    <form method="post" action="/team/delete/<%= teams[i].teamId %>">
                         <input type="submit" value="Delete" />
                     </form>
                    

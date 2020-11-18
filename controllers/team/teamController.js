@@ -1,6 +1,6 @@
 const express = require('express')
 const api = express.Router()
-const Model = require('../../models/team.js')
+const teamModel = require('../../models/team.js')
 const notfoundstring = 'team not found'
 const bodyParser = require('body-parser');
 const cons = require('consolidate');
@@ -12,7 +12,7 @@ api.use(bodyParser.urlencoded({ extended: true }));
 // GET all JSON
 api.get('/findall', (req, res) => {
     console.log(`Handling /findall ${req}`)
-    Model.find({}, (err, data) => {
+    teamModel.find({}, (err, data) => {
         if(err){
             return res.end(notfoundstring)
         }
@@ -24,7 +24,7 @@ api.get('/findall', (req, res) => {
   api.get('/findone/:id', (req, res) => {
     console.log(`Handling /findone ${req}`)
     const id = parseInt(req.params.id)
-    Model.find({ teamid: id }, (err, results) => {
+    teamModel.find({ teamid: id }, (err, results) => {
       if (err) { return res.end(notfoundstring) }
       res.json(results[0])
     })
@@ -35,13 +35,14 @@ api.get('/findall', (req, res) => {
 // GET to this controller base URI (the default)
 api.get('/teams', async (req,res)=>{
   console.log(`Handling GET / ${req}`)
-   await Model.find({},(err,data)=>{
+   await teamModel.find({},(err,data)=>{
         if (err) {
             return res.end('error on create')
         }
         res.locals.teams = data
+        var teams = res.locals.teams;
         console.log(res.locals.teams, "teams are here")
-        res.render('team/details', {title: 'team', res})
+        res.render('team/details', {title: 'teamslTest', teams})
     })
 })
 
@@ -49,9 +50,11 @@ api.get('/teams', async (req,res)=>{
 // GET create
 api.get('/create', (req, res) => {
     console.log(`Handling GET /create ${req}`)
-    Model.find({}, (err, data) => {
-      res.locals.team = data
+    teamModel.find({}, (err, data) => {
+      res.locals.teams = data
+      console.log(`teams ${res.locals.teams}`)
       res.locals.team = new Model()
+      console.log(`team ${res.locals.team}`)
       res.render('team/create')
     })
   })
@@ -60,7 +63,7 @@ api.get('/create', (req, res) => {
   api.post('/delete/:id',(req, res)=>{
     console.log(`Handling delete/:id ${req}`)
     const id = parseInt(req.params.id)
-    Model.remove({teamid:id}).setOptions({single:true}),exec((err, deleted) =>{
+    teamModel.remove({teamid:id}).setOptions({single:true}),exec((err, deleted) =>{
         if(err) {
             return res.end(`Could not find the record to delete`)
         }
@@ -73,7 +76,7 @@ api.get('/create', (req, res) => {
 api.get('/edit/:id', (req, res) => {
   console.log(`Handling GET /edit/:id ${req}`)
     const id = parseInt(req.params.id)
-    Model.find({ teamid: id }, (err, results) => {
+    teamModel.find({ teamid: id }, (err, results) => {
       if (err) { 
           return res.end(`Could not find the record`) 
         }
@@ -88,8 +91,9 @@ api.get('/edit/:id', (req, res) => {
   // POST new
 
   api.post('/save',(req,res)=>{
+    console.log('into the save')
       const body = req.body
-      const team = new Model(body)
+      const team = new teamModel(body)
       console.log(team,"body is here")
       team.save((err) => {
           if(err){
@@ -111,7 +115,7 @@ api.post('/save/:id', (req, res) => {
   console.log(`Handling SAVE request ${req}`)
     const id = parseInt(req.params.id)
     console.log(`Handling SAVING ID:${id}`)
-    Model.updateOne({teamid: id },
+    teamModel.updateOne({teamid: id },
       { 
         // use mongoose field update operator $set
         $set: {
