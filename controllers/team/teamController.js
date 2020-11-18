@@ -74,17 +74,18 @@ api.get('/create', (req, res) => {
 })
 
 
-api.post('/edit/:id', (req, res) => {
+api.post('/edit/:teamId', (req, res) => {
   console.log(`Handling EDIT`)
-    const id = parseInt(req.params.id)
-    teamModel.find({ teamId: id }, (err, results) => {
-      if (err) { 
-          return res.end(`Could not find the record`) 
-        }
-        const tname = 
-        console.log(`RETURNING VIEW FOR${JSON.stringify(results)}`)
-      res.locals.student = results[0]
-      return res.render('team/teams')
+    var teamid= req.params.teamId
+    console.log(teamid)
+
+    teamModel.find({ teamId: teamid }, (err, results) => {
+      if (err) { return res.end('could not find') }
+      // res.json(results[0])
+      console.log(results) 
+      // res.locals.student = results[0]
+      var teamName = results[0].teamName;
+      res.render('team/edit.ejs',{ teamid, teamName})
     })
   })
 
@@ -112,37 +113,28 @@ api.post('/edit/:id', (req, res) => {
   })
 
 // POST update with id
-api.post('/save/:id', (req, res) => {
-  console.log(`Handling SAVE request ${req}`)
-    const id = parseInt(req.params.id)
-    console.log(`Handling SAVING ID:${id}`)
-    teamModel.updateOne({teamid: id },
+api.post('/update/:id', (req, res) => {
+  console.log(` update request ${req.body}`)
+    const tId = parseInt(req.params.id)
+    // console.log(`Handling SAVING ID:${id}`)
+    console.log(tId)
+    console.log(req.body.tName)
+    teamModel.updateOne({teamId: tId },
       { 
         // use mongoose field update operator $set
         $set: {
-          teamid: parseInt(req.body.teamid),
-          teamname: req.body.teamname,
+          teamName: req.body.tName
         }
       },
       (err, item) => {
         if (err) { return res.end(`Record with the specified id not found`) }
-        console.log(`ORIGINAL VALUES ${JSON.stringify(item)}`)
-        console.log(`UPDATED VALUES: ${JSON.stringify(req.body)}`)
-        console.log(`SAVING UPDATED team ${JSON.stringify(item)}`)
-        return res.redirect('/teamController')
+        // console.log(`ORIGINAL VALUES ${JSON.stringify(item)}`)
+        // console.log(`UPDATED VALUES: ${JSON.stringify(req.body)}`)
+        // console.log(`SAVING UPDATED team ${JSON.stringify(item)}`)
+        return res.redirect('/team/teams')
       })
   })
 
-  // DELETE id (uses HTML5 form method POST)
-api.post('/delete/:id', (req, res) => {
-  console.log(`Handling DELETE request ${req}`)
-    const id = parseInt(req.params.id)
-    console.log(`Handling REMOVING ID=${id}`)
-    teamModel.remove({ teamid: id }).setOptions({ single: true }).exec((err, deleted) => {
-      if (err) { return res.end(`Id not found`) }
-      console.log(`Permanently deleted item ${JSON.stringify(deleted)}`)
-      return res.redirect('/team/teams')
-    })
-  })
+
 
 module.exports = api

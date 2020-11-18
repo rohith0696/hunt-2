@@ -82,11 +82,11 @@ router.get('/index', (req, res) => {
   router.use('/team',require('../controllers/team/teamController'))
 
   // catch 404 and forward to error handler
-router.use((req, res, next) => {
-  const error = new Error('Not Found')
-  error.status = 404
-  next(error)
-})
+// router.use((req, res, next) => {
+//   const error = new Error('Not Found')
+//   error.status = 404
+//   next(error)
+// })
 
 // error handler
 // router.use((err, req, res, next) => {
