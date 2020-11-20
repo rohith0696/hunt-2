@@ -49,10 +49,10 @@
 ## Team
 - Rohith Chittimalla
     - GitHub Link: https://github.com/rohith0696
-![rohith](https://github.com/rohith0696/hunt-2/blob/main/images/rohith.jpg)
+    - ![rohith](https://github.com/rohith0696/hunt-2/blob/main/images/rohith.jpg)
 - Rajashekar Gande
     - GitHub Link: https://github.com/Rajshekar2641
-![rajashekar](https://github.com/rohith0696/hunt-2/blob/main/images/rajashekar.jpeg)
+    - ![rajashekar](https://github.com/rohith0696/hunt-2/blob/main/images/rajashekar.jpeg)
 
 ## Deployment
 
