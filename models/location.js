@@ -8,39 +8,32 @@ autoInc = require('mongoose-auto-increment');
 autoInc.initialize(con)
 
 
-const QuestSchema = new mongoose.Schema({
+const LocationSchema = new mongoose.Schema({
 
-    questId:{
+    locationId:{
         type: Number,
         required: true,
         unique: true
     },
-    questName: {
-        type: String,
-        required: true,
-        unique: true,
-        
-    },
-    
-    questStartLocationLatitude: {
+    locationLatitude: {
         type: Number,
         required: true,
         allowNull: true,
         validate: { min: -90, max: 90 }
       },
-      questStartLocationLongitude: {
+      locationLongitude: {
         type: Number,
         allowNull: true,
         validate: { min: -180, max: 180 }
       },
     });
 
-QuestSchema.plugin(autoInc.plugin,{
-  model: 'quest',
-  field: 'questId',
-  startAt: 111,
+LocationSchema.plugin(autoInc.plugin,{
+  model: 'location',
+  field: 'locationId',
+  startAt: 11111,
   incrementBy: 1
 });
 
 // Export model
-module.exports = mongoose.model('Quest',QuestSchema)
+module.exports = mongoose.model('Location',LocationSchema)
