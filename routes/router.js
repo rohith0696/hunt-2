@@ -62,13 +62,13 @@ router.get('/index', (req, res) => {
   //   res.render('./team/details', { title: "Teams", require: axios, teams: teams})
   // })
   
-  router.get('/team/createTeam', (req, res, next) => {
+  router.get('/team', (req, res, next) => {
     res.render('./team/create', { title: "Team", require: axios})
   })
   
-  router.get('/team/details', (req, res, next) => {
-    res.render('./team/details')
-  })
+  // router.get('/team/details', (req, res, next) => {
+  //   res.render('./team/details')
+  // })
   
   router.get('/team/invitePlayers', (req, res, next) => {
     res.render('./team/invitePlayers', { title: "Invite Players"})
@@ -82,11 +82,11 @@ router.get('/index', (req, res) => {
   router.use('/team',require('../controllers/team/teamController'))
 
   // catch 404 and forward to error handler
-router.use((req, res, next) => {
-  const error = new Error('Not Found')
-  error.status = 404
-  next(error)
-})
+// router.use((req, res, next) => {
+//   const error = new Error('Not Found')
+//   error.status = 404
+//   next(error)
+// })
 
 // error handler
 // router.use((err, req, res, next) => {

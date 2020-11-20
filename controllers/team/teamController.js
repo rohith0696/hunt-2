@@ -61,28 +61,31 @@ api.get('/create', (req, res) => {
 
   // GET /delete/:id
   api.post('/delete/:id',(req, res)=>{
-    console.log(`Handling delete/:id ${req}`)
+    console.log(req.params,'Handling delete')
     const id = parseInt(req.params.id)
-    teamModel.remove({teamid:id}).setOptions({single:true}),exec((err, deleted) =>{
+    console.log(id,'id')
+    teamModel.deleteOne({teamId:id}).setOptions({single:true}).exec((err, deleted) =>{
         if(err) {
-            return res.end(`Could not find the record to delete`)
+            return res.end("Could not find the record to delete")
         }
-        console(`RETURNING VIEW FOR ${JSON.stringify(results)}`)
-        return res.render(`team/get`)
+        console.log(`RETURNING VIEW FOR ${JSON.stringify(deleted)}`)
+        return res.redirect('/team/teams')
     })
 })
 
 
-api.get('/edit/:id', (req, res) => {
-  console.log(`Handling GET /edit/:id ${req}`)
-    const id = parseInt(req.params.id)
-    teamModel.find({ teamid: id }, (err, results) => {
-      if (err) { 
-          return res.end(`Could not find the record`) 
-        }
-        console.log(`RETURNING VIEW FOR${JSON.stringify(results)}`)
-      res.locals.student = results[0]
-      return res.render('team/edit.ejs')
+api.post('/edit/:teamId', (req, res) => {
+  console.log(`Handling EDIT`)
+    var teamid= req.params.teamId
+    console.log(teamid)
+
+    teamModel.find({ teamId: teamid }, (err, results) => {
+      if (err) { return res.end('could not find') }
+      // res.json(results[0])
+      console.log(results) 
+      // res.locals.student = results[0]
+      var teamName = results[0].teamName;
+      res.render('team/edit.ejs',{ teamid, teamName})
     })
   })
 
@@ -93,14 +96,13 @@ api.get('/edit/:id', (req, res) => {
   api.post('/save',(req,res)=>{
     console.log('into the save')
       const body = req.body
+      console.log(body)
       const team = new teamModel(body)
       console.log(team,"body is here")
       team.save((err) => {
           if(err){
               return res.status().json({"msg": err})
-            
           }else{
-            
             return res.json({
                 "error": false,
                 data: team
@@ -111,37 +113,28 @@ api.get('/edit/:id', (req, res) => {
   })
 
 // POST update with id
-api.post('/save/:id', (req, res) => {
-  console.log(`Handling SAVE request ${req}`)
-    const id = parseInt(req.params.id)
-    console.log(`Handling SAVING ID:${id}`)
-    teamModel.updateOne({teamid: id },
+api.post('/update/:id', (req, res) => {
+  console.log(` update request ${req.body}`)
+    const tId = parseInt(req.params.id)
+    // console.log(`Handling SAVING ID:${id}`)
+    console.log(tId)
+    console.log(req.body.tName)
+    teamModel.updateOne({teamId: tId },
       { 
         // use mongoose field update operator $set
         $set: {
-          teamid: parseInt(req.body.teamid),
-          teamname: req.body.teamname,
+          teamName: req.body.tName
         }
       },
       (err, item) => {
         if (err) { return res.end(`Record with the specified id not found`) }
-        console.log(`ORIGINAL VALUES ${JSON.stringify(item)}`)
-        console.log(`UPDATED VALUES: ${JSON.stringify(req.body)}`)
-        console.log(`SAVING UPDATED team ${JSON.stringify(item)}`)
-        return res.redirect('/teamController')
+        // console.log(`ORIGINAL VALUES ${JSON.stringify(item)}`)
+        // console.log(`UPDATED VALUES: ${JSON.stringify(req.body)}`)
+        // console.log(`SAVING UPDATED team ${JSON.stringify(item)}`)
+        return res.redirect('/team/teams')
       })
   })
 
-  // DELETE id (uses HTML5 form method POST)
-api.post('/delete/:id', (req, res) => {
-  console.log(`Handling DELETE request ${req}`)
-    const id = parseInt(req.params.id)
-    console.log(`Handling REMOVING ID=${id}`)
-    Model.remove({ teamid: id }).setOptions({ single: true }).exec((err, deleted) => {
-      if (err) { return res.end(`Id not found`) }
-      console.log(`Permanently deleted item ${JSON.stringify(deleted)}`)
-      return res.redirect('/teamController')
-    })
-  })
+
 
 module.exports = api

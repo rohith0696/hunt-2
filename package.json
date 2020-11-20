@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "15.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
@@ -30,6 +33,7 @@
     "heroku": "^0.2.0",
     "mongoose": "^5.10.12",
     "mongoose-auto-increment": "^5.0.1",
+    "node": "^15.2.1",
     "nodemon": "^2.0.6",
     "winston": "^3.3.3"
   },

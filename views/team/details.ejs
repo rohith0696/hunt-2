@@ -1,23 +1,48 @@
-<br>
-<br>
-<div class="container-fluid">
-    <div class=row>
-        <div class="col col-md-12">
-<label>Teams</label>
-            <% for(var i=0; i<teams.length; i++) { %>
-                <!-- <%= console.log(teams, "teams are here") %> -->
-                <tr>
-                    <td><%= teams[i].teamName %></td>
-                    <label>Edit</label>
-                    <form method="post" action="/team/delete/<%= teams[i].teamId %>">
-                        <input type="submit" value="Delete" />
-                    </form>
-                   
-                    <br />
-                </tr>
-            <%} %>
+<body>
+    <main>
+        <div class="container">
+            <div class="form-group">
+                <div class="col col-md-12">
+                    <label class="col-25 d-flex align-items-center mx-auto mt-5 p-1 flex-column col-lg-4 bg-white">
+                        <h3> Teams details </h3>
+                        <% for(var i=0; i<teams.length; i++) { %>
+                        <!-- <%= console.log(teams, "teams are here") %> -->
+                       <table>
+                        <tr>
+                            <td>
+                                <label class="col-25 d-flex align-items-center mx-auto flex-column col-lg-4">
+                                <p>
+                                    <%= teams[i].teamName %>
+                                </p>
+                            </label>
+                            </td>
+                            <td>
+                                <form method="post"  action="/team/edit/<%= teams[i].teamId %>"
+                                    class="col-25 d-flex align-items-center mx-auto flex-column col-lg-4">
+                                    <input type="submit" value="Edit" />
+                                    
+                                </form>
+                            </td>
+                            <td>
+                                <form method="post"  action="/team/delete/<%= teams[i].teamId %>"
+                                    class="col-25 d-flex align-items-center mx-auto flex-column col-lg-4">
+                                    <input type="submit" value="Delete" />
+                                    
+                                </form>
+                            </td>
 
+                            <br />
+                        </tr>
+                    </table>
+                        <%} %>
+                    </label>
 
+                </div>
+                <button type="button" onclick="location.href='/team'"
+                    class="col-25 d-flex align-items-center mx-auto mt-5 p-1 flex-column col-lg-4"
+                    style="background-color: #00674c; color: white; padding: 0px;border-radius: 6px;align-self: center; height: 30px;width: 120px;justify-content: center;"
+                    value="back" id="back">Back</button>
+            </div>
         </div>
-    </div>
-</div>
+    </main>
+</body>
