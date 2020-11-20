@@ -4,10 +4,6 @@
 - GitHub Repo : https://github.com/rohith0696/hunt-2
 - Hosted App deployed on Heroku: https://hunt-2.herokuapp.com/
 
-## Team
-- Rohith Chittimalla
-- Rajashekar Gande
-
 ## Stack
 - Platform : Node(15.1.0),
 - Web Framework : Express,
@@ -48,6 +44,14 @@
 - https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/
 - https://github.com/Krishna-Koyyalamudi/The-Hunt
 - https://github.com/Dixith1196/hunt
+
+## Team
+- Rohith Chittimalla
+    - GitHub Link: https://github.com/rohith0696
+    - ![rohith]()
+- Rajashekar Gande
+    - GitHub Link: https://github.com/Rajshekar2641
+    - ![rajashekar]()
 
 ## Deployment
 
