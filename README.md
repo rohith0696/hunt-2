@@ -12,16 +12,17 @@
 - ORD : Mongoose,
 - Web App Host : Heroku,
 - Data Host : Atlas,
-- Coding Standards : ESlint.
+- Coding Standards : ESlint,
+- A&A: Passport.
 
 ## CI/CD
 - Auto deploy is used from main repo.
 
 ## Instructions
 * Steps for starting the cloned repository using the Powershell.
- * Open PS as admin using the Powershell in the-Hunt Folder.
+ * Open PS as admin using the Powershell in hunt-2 Folder.
  * Use "npm install" to install modules.
- * Use "npm run dev" to start a local version.
+ * Use "npm run start" to start a local version.
  * Open a browser to the URL provided in the powershell.
  
  ## Production Environment
@@ -48,10 +49,10 @@
 ## Team
 - Rohith Chittimalla
     - GitHub Link: https://github.com/rohith0696
-    - ![rohith](https://github.com/rohith0696/hunt-2/blob/main/images/rohith.jpg)
+![rohith](https://github.com/rohith0696/hunt-2/blob/main/images/rohith.jpg)
 - Rajashekar Gande
     - GitHub Link: https://github.com/Rajshekar2641
-    - ![rajashekar](https://github.com/rohith0696/hunt-2/blob/main/images/rajashekar.jpeg)
+![rajashekar](https://github.com/rohith0696/hunt-2/blob/main/images/rajashekar.jpeg)
 
 ## Deployment
 
