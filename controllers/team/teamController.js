@@ -55,7 +55,7 @@ api.get('/create', (req, res) => {
       console.log(`teams ${res.locals.teams}`)
       res.locals.team = new Model()
       console.log(`team ${res.locals.team}`)
-      res.render('team/create')
+      return res.render('team/create')
     })
   })
 
@@ -103,6 +103,9 @@ api.post('/edit/:teamId', (req, res) => {
           if(err){
               return res.status().json({"msg": err})
           }else{
+            console.log("team save")
+          //   res.render('team/details')
+          //  return res.redirect("team/teams")
             return res.json({
                 "error": false,
                 data: team
